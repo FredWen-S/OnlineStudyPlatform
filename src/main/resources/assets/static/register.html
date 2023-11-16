@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册页面</title>>
+    <script src=" https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="js/register.js"></script>
+    <link rel="stylesheet" href="css/register.css">
+</head>
+<body>
+<div id="app">
+    <h2>用户注册</h2>
+    <form class="registration-form" @submit.prevent="registerUser">
+        <div class="form-group">
+            <label for="username">用户名 *</label>
+            <input type="text" id="username" v-model="username" required>
+        </div>
+        <div class="form-group">
+            <label for="password">密码 *</label>
+            <input type="password" id="password" v-model="password" required>
+        </div>
+        <div class="form-group">
+            <label for="email">电子邮件地址 *</label>
+            <input type="email" id="email" v-model="email" required>
+        </div>
+        <div class="form-group">
+            <label>选择身份 *</label>
+            <select id="identity" v-model="selectedIdentity" required>
+                <option value="" disabled selected>请选择</option>
+                <option value="teacher">老师</option>
+                <option value="student">学生</option>
+            </select>
+        </div>
+        <div v-if="selectedIdentity === 'teacher'" class="teacher-info">
+            <div class="form-group">
+                <label for="education">学历</label>
+                <input type="text" id="education" v-model="teacherInfo.education">
+            </div>
+            <div class="form-group">
+                <label for="school">所属单位</label>
+                <input type="text" id="school" v-model="teacherInfo.school">
+            </div>
+            <!-- 其他老师信息字段 -->
+        </div>
+        <div v-if="selectedIdentity === 'student'" class="student-info">
+            <div class="form-group">
+                <label for="schoolName">学校名称</label>
+                <input type="text" id="schoolName" v-model="studentInfo.schoolName">
+            </div>
+            <div class="form-group">
+                <label for="grade">年级</label>
+                <input type="text" id="grade" v-model="studentInfo.grade">
+            </div>
+            <!-- 其他学生信息字段 -->
+        </div>
+        <button type="submit">注册</button>
+    </form>
+</div>
+</body>
+</html>
